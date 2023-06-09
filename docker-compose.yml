@@ -1,0 +1,103 @@
+version: "3"
+
+services:
+  # nginx:
+  #   container_name: nginx
+  #   image: nginx:alpine
+  #   restart: unless-stopped
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - tmp_vol:/tmp
+  #     - ./nginx/conf/nginx.prod.conf:/etc/nginx/conf.d/default.conf:ro
+  #     - ./nginx/build:/usr/share/nginx/html
+  #     # - ./backend/static:/usr/share/nginx/django_static
+  #     - ./nginx/data/certbot/conf:/etc/letsencrypt
+  #     - ./nginx/data/certbot/www:/var/www/certbot
+  #   depends_on:
+  #     - client
+  #     - redis
+  #     - server
+  #   command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
+
+  # certbot:
+  #   container_name: certbot
+  #   image: certbot/certbot
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./nginx/data/certbot/conf:/etc/letsencrypt
+  #     - ./nginx/data/certbot/www:/var/www/certbot
+  #   entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+  server:
+    container_name: server
+    # restart: unless-stopped
+    build:
+      context: ./server
+    stdin_open: true
+    tty: true
+    working_dir: /src
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./server:/src
+      - run_vol:/var/run
+      - cache_vol:/var/cache
+      - tmp_vol:/tmp
+    env_file:
+      - .env.dev
+      - .env
+      - key.env
+    depends_on:
+      - redis
+    command: >
+      sh -c "rm -rf core/migrations &&
+              python manage.py makemigrations &&
+              python manage.py makemigrations core drf_instamojo && 
+              python manage.py migrate &&
+              python manage.py shell < tools/create_superuser.py &&
+
+              python manage.py runserver 0.0.0.0:8000"
+
+  redis:
+    container_name: redis
+    restart: always
+    image: redis
+    command: [
+      "sh", "-c",
+      'docker-entrypoint.sh --appendonly yes --requirepass "$$REDIS_PASSWORD"'
+    ]
+    ports:
+      - "6379:6379"
+    env_file:
+      - .env.dev
+  
+  client:
+    container_name: client
+    build:
+      context: ./client
+    volumes:
+      - ./client:/usr/app
+    # env_file:
+    #   - ./client/.env.local
+    ports:
+      - 3000:3000
+    depends_on:
+      - server
+    command: >
+      sh -c "npm run dev"
+
+volumes:
+  run_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+  cache_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+  tmp_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs

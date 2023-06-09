@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.dark{
+    @apply bg-slate-900
+}
+
+.card{
+    @apply relative overflow-hidden text-gray-900 break-words bg-white shadow-lg rounded-xl dark:bg-slate-700 dark:text-gray-100;
+}
+
+.button{
+   @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800
+}
+
+.sidebar-menu{
+    @apply flex px-2 py-2 mx-2 text-gray-800 rounded-md cursor-pointer md:rounded-xl md:pr-2 hover:bg-blue-200 md:hover:bg-blue-200 dark:text-gray-100 dark:hover:bg-gray-700;
+}
+
+.button-2{
+    @apply text-white bg-fuchsia-700 hover:bg-fuchsia-800 focus:ring-4 focus:ring-fuchsia-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-fuchsia-600 dark:hover:bg-fuchsia-700 focus:outline-none dark:focus:ring-fuchsia-800
+}
+
+/* .card {
+  @apply relative overflow-hidden text-gray-900 bg-white rounded-md shadow-md dark:bg-slate-700 dark:text-gray-100;
+} */
+
+.form-alert{
+  @apply pl-2  text-sm font-medium text-red-600 dark:text-red-600
+}
+
+.button {
+  @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800;
+}
+
+.button-2 {
+  @apply focus:outline-none text-gray-800 bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900;
+}
+
+.right-anim {
+  animation: rightAnim 0.5s ease-in-out;
+}
+
+.left-anim {
+  animation: leftAnim 0.5s ease-in-out;
+}
+
+.input-field{
+  @apply bg-gray-50  border text-gray-900 rounded-lg   focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 
+}
+
+.disabled-button{
+  @apply disabled:bg-gray-400 dark:disabled:bg-gray-100 dark:disabled:bg-opacity-10 dark:disabled:text-gray-100 dark:disabled:text-opacity-40
+}
+
+.shine-box:before {
+  position: absolute;
+  top: 0;
+  left: -500px;
+  content: "";
+  width: 120px;
+  height: 500px;
+  background: rgba(255, 255, 255, 0.6);
+  transform: skew(-50deg);
+  /* transition: 1s; */
+  animation: shine 3s ease infinite;
+}
+
+.Toastify__toast {
+  border-radius: 20px !important; 
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+  margin-top: 1rem !important;
+  }
+
+@keyframes shine {
+  from {left: -500px;}
+  to {left: 655px;}
+}
+
+@keyframes leftAnim {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes rightAnim {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* .right-anim {
+  animation: rightAnim 0.5s;
+}
+
+.left-anim {
+  animation: leftAnim 0.5s;
+}
+
+@keyframes leftAnim {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes rightAnim {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+} */
+
+.ticket {
+  background-image: radial-gradient(circle at top left, transparent 17px, #facc15 17px), radial-gradient(circle at top right, transparent 17px, #facc15 17px), radial-gradient(circle at bottom left, transparent 17px, #facc15 17px), radial-gradient(circle at bottom right, transparent 17px, #facc15 17px);
+
+}
+
+
+#raffle-red div {
+  background-image: radial-gradient(circle at top left, transparent 17px, #facc15 17px), radial-gradient(circle at top right, transparent 17px, #facc15 17px), radial-gradient(circle at bottom left, transparent 17px, #facc15 17px), radial-gradient(circle at bottom right, transparent 17px, #facc15 17px);
+  box-shadow: 0 38px 14px -35px rgba(0,0,0,0.3);
+  background-size: 50% 50%;
+  background-position: top left, top right, bottom left, bottom right;
+}
+.raffle div {
+  width: 220px;
+  height: 110px;
+  margin-left: -110px;
+  margin-top: -55px;
+  background-repeat: no-repeat;
+}
+
+
+.entry div {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+#raffle-red div:before {
+  /* content: 'Coupon'; */
+  width: 234px;
+  height: 76px;
+  padding-left: 36px;
+  left: -7px;
+  top: 17px;
+  background-size: 7px 7px;
+  background-repeat: repeat-y;
+  background-position: 0 0, 0 0, 100% 0, 100% 0;
+  background-image: linear-gradient(45deg, transparent 75%, #facc15 75%), linear-gradient(135deg, transparent 75%, #facc15 75%), linear-gradient(-45deg, transparent 75%, #facc15 75%), linear-gradient(-135deg, transparent 75%, #facc15 75%);
+  line-height: 1.9;
+  font-size: 38px;
+  text-align: left;
+}
+
+.raffle div:before {
+  font-family: 'HelveticaNeue-CondensedBold', 'Arial Narrow', Impact, 'Roboto', sans-serif;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.raffle div:before, .raffle div:after {
+  box-sizing: border-box;
+  color: #333;
+}
+
+.entry div:before, .entry div:after {
+  display: block;
+  content: '';
+  position: absolute;
+}
+/* #raffle-red div:after {
+  content: 'BB94CF';
+  width: 75px;
+  height: 185px;
+  padding-top: 162px;
+  top: -37px;
+  left: 72px;
+  background: linear-gradient(to bottom, transparent 155px, #a16207 155px, #a16207 158px, transparent 158px);
+  border: 3px solid #a16207;
+} */
+
+.raffle div:after {
+  border-radius: 10px;
+  transform: rotate(-90deg);
+  font-size: 14px;
+  font-family: monospace;
+  text-align: center;
+  line-height: 1;
+}
+
+.raffle div:before, .raffle div:after {
+  box-sizing: border-box;
+  color: #333;
+}
+
+.entry div:before, .entry div:after {
+  display: block;
+  content: '';
+  position: absolute;
+}body {
+  line-height: 1;
+}
+
+
+.no-scale:after {
+  border-radius: 10px;
+  -ms-transform: rotate(-90deg) !important; /* IE 9 */
+  -webkit-transform: rotate(-90deg)!important;
+  transform: rotate(-90deg)!important ; 
+  font-size: 14px;
+  font-family: monospace;
+  text-align: center;
+  line-height: 1;
+}
+
+.raffle div:before, .raffle div:after {
+  box-sizing: border-box;
+  color: #333;
+}
+
+.entry div:before, .entry div:after {
+  display: block;
+  content: '';
+  position: absolute;
+}
